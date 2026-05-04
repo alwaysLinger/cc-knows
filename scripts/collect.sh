@@ -27,7 +27,7 @@ claude -p --print --no-session-persistence \
   "访问 https://www.anthropic.com/engineering 页面，提取所有文章链接。
    将结果以 JSON 数组写入文件 .article-list.json，格式：
    [{\"url\": \"https://www.anthropic.com/engineering/...\", \"title\": \"文章标题\"}]
-   除此之外不要写入任何其他内容到该文件。"
+   除此之外不要写入任何其他内容到该文件。" < /dev/null
 
 # Validate the article list file
 if [ ! -f "$ARTICLE_LIST_FILE" ]; then
@@ -116,7 +116,7 @@ process_article() {
     --model "$MODEL" \
     --allowedTools "WebFetch,Write" \
     --max-budget-usd 3 \
-    "$prompt"; then
+    "$prompt" < /dev/null; then
 
     # Update processed.json
     local now
