@@ -5,6 +5,7 @@ SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 PROJECT_DIR="$(dirname "$SCRIPT_DIR")"
 ARTICLES_DIR="$PROJECT_DIR/articles"
 PROCESSED_FILE="$PROJECT_DIR/processed.json"
+ARTICLE_LIST_FILE="$PROJECT_DIR/.article-list.json"
 MODEL="${CLAUDE_MODEL:-glm-5.1}"
 
 mkdir -p "$ARTICLES_DIR"
@@ -18,55 +19,56 @@ fi
 
 echo "=== Fetching article list ==="
 
-ARTICLE_LIST_OUTPUT=$(claude -p --print --output-format text \
+# Have Claude write the article list directly to a file (avoids stdout parsing issues)
+claude -p --print --no-session-persistence \
   --model "$MODEL" \
-  --allowedTools "WebFetch" \
+  --allowedTools "WebFetch,Write" \
   --max-budget-usd 1 \
-  --no-session-persistence \
   "访问 https://www.anthropic.com/engineering 页面，提取所有文章链接。
-   返回一个纯 JSON 数组，不要包含任何其他文字。格式：
+   将结果以 JSON 数组写入文件 .article-list.json，格式：
    [{\"url\": \"https://www.anthropic.com/engineering/...\", \"title\": \"文章标题\"}]
-   只返回 JSON，不要有其他内容。" 2>&1 | tee /dev/stderr) || true
+   除此之外不要写入任何其他内容到该文件。"
 
-# Try to extract JSON array from response (handle extra text around it)
-ARTICLE_LIST_JSON=$(echo "$ARTICLE_LIST_OUTPUT" | sed -n '/\[.*\]/{s/.*\[/[/; s/\].*/]/; p; q}')
-if [ -z "$ARTICLE_LIST_JSON" ]; then
-  ARTICLE_LIST_JSON="$ARTICLE_LIST_OUTPUT"
-fi
-
-# Validate JSON
-if ! echo "$ARTICLE_LIST_JSON" | jq -e 'type == "array"' > /dev/null 2>&1; then
-  echo "Error: Failed to get valid JSON article list."
-  echo "Full output (stdout+stderr):"
-  echo "$ARTICLE_LIST_OUTPUT"
+# Validate the article list file
+if [ ! -f "$ARTICLE_LIST_FILE" ]; then
+  echo "Error: Article list file was not created"
   exit 1
 fi
 
-echo ""
+ARTICLE_COUNT=$(jq 'length' "$ARTICLE_LIST_FILE" 2>/dev/null || echo 0)
+echo "Article list contains $ARTICLE_COUNT articles"
+
+if ! jq -e 'type == "array"' "$ARTICLE_LIST_FILE" > /dev/null 2>&1; then
+  echo "Error: Invalid article list JSON. Content:"
+  cat "$ARTICLE_LIST_FILE"
+  exit 1
+fi
 
 # ─── Step 2: Find new articles ───────────────────────────────────────────────
 
 echo "=== Finding new articles ==="
 
-# Normalize URLs in article list before comparison (strip fragment and trailing slash)
-ARTICLE_LIST_JSON=$(echo "$ARTICLE_LIST_JSON" | jq -c '
-  map(.url |= (split("#")[0] | sub("/$"; "")))
-')
+# Normalize URLs (strip fragment and trailing slash)
+jq -c 'map(.url |= (split("#")[0] | sub("/$"; "")))' \
+  "$ARTICLE_LIST_FILE" > "$ARTICLE_LIST_FILE.tmp"
+mv "$ARTICLE_LIST_FILE.tmp" "$ARTICLE_LIST_FILE"
 
-NEW_ARTICLES=$(echo "$ARTICLE_LIST_JSON" | jq -c --slurpfile processed "$PROCESSED_FILE" '
+NEW_ARTICLES=$(jq -c --slurpfile processed "$PROCESSED_FILE" '
   map(. as $a | select(($processed[0] | has($a.url)) | not))
-')
+' "$ARTICLE_LIST_FILE")
 
 NEW_COUNT=$(echo "$NEW_ARTICLES" | jq 'length')
-echo "Found $NEW_COUNT new article(s)"
+echo "Found $NEW_COUNT new article(s) (already processed: $(jq 'length' "$PROCESSED_FILE"))"
 
 if [ "$NEW_COUNT" -eq 0 ]; then
   echo "No new articles. Exiting."
-  echo ""
+  rm -f "$ARTICLE_LIST_FILE" "$ARTICLE_LIST_FILE.tmp"
   exit 0
 fi
 
-echo ""
+# Show which articles will be processed
+echo "New articles:"
+echo "$NEW_ARTICLES" | jq -r '.[] | "  - \(.title)"'
 
 # ─── Step 3: Process each new article ────────────────────────────────────────
 
@@ -76,7 +78,7 @@ process_article() {
   local url="$1"
   local title="$2"
 
-  # Normalize URL: strip trailing slash and fragment for consistent tracking
+  # Normalize URL
   url=$(echo "$url" | sed -E 's|[#].*||; s|/$||')
 
   # Extract slug from URL (last path segment)
@@ -126,7 +128,7 @@ process_article() {
 
     # Commit this article
     git add "$article_dir" "$PROCESSED_FILE"
-    git commit -m "collect: ${title}"
+    git commit -m "collect: ${title}" || echo "WARNING: git commit failed (nothing to commit?)"
 
     echo "Done: $title"
     PROCESSED_COUNT=$((PROCESSED_COUNT + 1))
@@ -144,4 +146,6 @@ while IFS= read -r article; do
   process_article "$url" "$title"
 done < <(echo "$NEW_ARTICLES" | jq -c '.[]')
 
+# Cleanup
+rm -f "$ARTICLE_LIST_FILE" "$ARTICLE_LIST_FILE.tmp"
 echo "All done. Processed $PROCESSED_COUNT article(s)."
