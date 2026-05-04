@@ -16,7 +16,7 @@ fi
 
 # ─── Step 1: Get article list from engineering page ──────────────────────────
 
-echo "::group::Fetching article list"
+echo "=== Fetching article list ==="
 
 ARTICLE_LIST_OUTPUT=$(claude -p --print --output-format text \
   --model "$MODEL" \
@@ -26,7 +26,7 @@ ARTICLE_LIST_OUTPUT=$(claude -p --print --output-format text \
   "访问 https://www.anthropic.com/engineering 页面，提取所有文章链接。
    返回一个纯 JSON 数组，不要包含任何其他文字。格式：
    [{\"url\": \"https://www.anthropic.com/engineering/...\", \"title\": \"文章标题\"}]
-   只返回 JSON，不要有其他内容。" 2>&1) || true
+   只返回 JSON，不要有其他内容。" 2>&1 | tee /dev/stderr) || true
 
 # Try to extract JSON array from response (handle extra text around it)
 ARTICLE_LIST_JSON=$(echo "$ARTICLE_LIST_OUTPUT" | sed -n '/\[.*\]/{s/.*\[/[/; s/\].*/]/; p; q}')
@@ -42,11 +42,11 @@ if ! echo "$ARTICLE_LIST_JSON" | jq -e 'type == "array"' > /dev/null 2>&1; then
   exit 1
 fi
 
-echo "::endgroup::"
+echo ""
 
 # ─── Step 2: Find new articles ───────────────────────────────────────────────
 
-echo "::group::Finding new articles"
+echo "=== Finding new articles ==="
 
 # Normalize URLs in article list before comparison (strip fragment and trailing slash)
 ARTICLE_LIST_JSON=$(echo "$ARTICLE_LIST_JSON" | jq -c '
@@ -62,11 +62,11 @@ echo "Found $NEW_COUNT new article(s)"
 
 if [ "$NEW_COUNT" -eq 0 ]; then
   echo "No new articles. Exiting."
-  echo "::endgroup::"
+  echo ""
   exit 0
 fi
 
-echo "::endgroup::"
+echo ""
 
 # ─── Step 3: Process each new article ────────────────────────────────────────
 
@@ -86,7 +86,7 @@ process_article() {
   local article_dir="$ARTICLES_DIR/$slug"
   mkdir -p "$article_dir"
 
-  echo "::group::Processing: $title ($slug)"
+  echo "=== Processing: $title ($slug) ==="
 
   local prompt="获取文章：${url}
 
@@ -134,7 +134,7 @@ process_article() {
     echo "ERROR: Failed to process $title"
   fi
 
-  echo "::endgroup::"
+  echo ""
 }
 
 # Process articles sequentially (use process substitution to avoid subshell)
