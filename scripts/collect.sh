@@ -18,7 +18,7 @@ fi
 
 echo "::group::Fetching article list"
 
-ARTICLE_LIST_RAW=$(claude -p --print --output-format text \
+ARTICLE_LIST_OUTPUT=$(claude -p --print --output-format text \
   --model "$MODEL" \
   --allowedTools "WebFetch" \
   --max-budget-usd 1 \
@@ -26,18 +26,19 @@ ARTICLE_LIST_RAW=$(claude -p --print --output-format text \
   "访问 https://www.anthropic.com/engineering 页面，提取所有文章链接。
    返回一个纯 JSON 数组，不要包含任何其他文字。格式：
    [{\"url\": \"https://www.anthropic.com/engineering/...\", \"title\": \"文章标题\"}]
-   只返回 JSON，不要有其他内容。")
+   只返回 JSON，不要有其他内容。" 2>&1) || true
 
 # Try to extract JSON array from response (handle extra text around it)
-ARTICLE_LIST_JSON=$(echo "$ARTICLE_LIST_RAW" | sed -n '/\[.*\]/{s/.*\[/[/; s/\].*/]/; p; q}')
+ARTICLE_LIST_JSON=$(echo "$ARTICLE_LIST_OUTPUT" | sed -n '/\[.*\]/{s/.*\[/[/; s/\].*/]/; p; q}')
 if [ -z "$ARTICLE_LIST_JSON" ]; then
-  ARTICLE_LIST_JSON="$ARTICLE_LIST_RAW"
+  ARTICLE_LIST_JSON="$ARTICLE_LIST_OUTPUT"
 fi
 
 # Validate JSON
 if ! echo "$ARTICLE_LIST_JSON" | jq -e 'type == "array"' > /dev/null 2>&1; then
-  echo "Error: Failed to get valid JSON article list. Raw response was:"
-  echo "$ARTICLE_LIST_RAW"
+  echo "Error: Failed to get valid JSON article list."
+  echo "Full output (stdout+stderr):"
+  echo "$ARTICLE_LIST_OUTPUT"
   exit 1
 fi
 
