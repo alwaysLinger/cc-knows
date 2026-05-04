@@ -2,5 +2,9 @@
   "https://www.anthropic.com/engineering/april-23-postmortem": {
     "processed_at": "2026-05-04T17:37:13Z",
     "slug": "april-23-postmortem"
+  },
+  "https://www.anthropic.com/engineering/managed-agents": {
+    "processed_at": "2026-05-04T17:52:39Z",
+    "slug": "managed-agents"
   }
 }
