@@ -126,9 +126,10 @@ process_article() {
       "$PROCESSED_FILE" > "$PROCESSED_FILE.tmp"
     mv "$PROCESSED_FILE.tmp" "$PROCESSED_FILE"
 
-    # Commit this article
+    # Commit and push this article immediately
     git add "$article_dir" "$PROCESSED_FILE"
     git commit -m "collect: ${title}" || echo "WARNING: git commit failed (nothing to commit?)"
+    git push || echo "WARNING: git push failed"
 
     echo "Done: $title"
     PROCESSED_COUNT=$((PROCESSED_COUNT + 1))
