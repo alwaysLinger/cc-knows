@@ -42,5 +42,9 @@
   "https://www.anthropic.com/engineering/advanced-tool-use": {
     "processed_at": "2026-05-05T05:01:30Z",
     "slug": "advanced-tool-use"
+  },
+  "https://www.anthropic.com/engineering/code-execution-with-mcp": {
+    "processed_at": "2026-05-05T05:06:17Z",
+    "slug": "code-execution-with-mcp"
   }
 }
