@@ -1,8 +1,8 @@
 name: Collect Anthropic Engineering Articles
 
 on:
-  # schedule:
-  #   - cron: '0 */12 * * *'   # 每 12 小时
+  schedule:
+    - cron: '0 8,20 * * *'    # 每天 8:00 和 20:00 UTC
   workflow_dispatch:          # 手动触发
 
 permissions:
