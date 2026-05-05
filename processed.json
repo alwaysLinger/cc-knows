@@ -74,5 +74,9 @@
   "https://www.anthropic.com/engineering/multi-agent-research-system": {
     "processed_at": "2026-05-05T05:44:05Z",
     "slug": "multi-agent-research-system"
+  },
+  "https://www.anthropic.com/engineering/claude-code-best-practices": {
+    "processed_at": "2026-05-05T05:50:33Z",
+    "slug": "claude-code-best-practices"
   }
 }
