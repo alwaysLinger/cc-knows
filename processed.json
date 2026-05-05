@@ -58,5 +58,9 @@
   "https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents": {
     "processed_at": "2026-05-05T05:19:14Z",
     "slug": "effective-context-engineering-for-ai-agents"
+  },
+  "https://www.anthropic.com/engineering/a-postmortem-of-three-recent-issues": {
+    "processed_at": "2026-05-05T05:28:24Z",
+    "slug": "a-postmortem-of-three-recent-issues"
   }
 }
