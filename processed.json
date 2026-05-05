@@ -86,5 +86,9 @@
   "https://www.anthropic.com/engineering/swe-bench-sonnet": {
     "processed_at": "2026-05-05T06:02:19Z",
     "slug": "swe-bench-sonnet"
+  },
+  "https://www.anthropic.com/engineering/building-effective-agents": {
+    "processed_at": "2026-05-05T06:08:36Z",
+    "slug": "building-effective-agents"
   }
 }
