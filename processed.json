@@ -46,5 +46,9 @@
   "https://www.anthropic.com/engineering/code-execution-with-mcp": {
     "processed_at": "2026-05-05T05:06:17Z",
     "slug": "code-execution-with-mcp"
+  },
+  "https://www.anthropic.com/engineering/claude-code-sandboxing": {
+    "processed_at": "2026-05-05T05:09:28Z",
+    "slug": "claude-code-sandboxing"
   }
 }
