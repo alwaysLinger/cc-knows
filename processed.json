@@ -90,5 +90,9 @@
   "https://www.anthropic.com/engineering/building-effective-agents": {
     "processed_at": "2026-05-05T06:08:36Z",
     "slug": "building-effective-agents"
+  },
+  "https://www.anthropic.com/engineering/contextual-retrieval": {
+    "processed_at": "2026-05-05T06:14:10Z",
+    "slug": "contextual-retrieval"
   }
 }
