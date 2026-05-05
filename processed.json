@@ -66,5 +66,9 @@
   "https://www.anthropic.com/engineering/writing-tools-for-agents": {
     "processed_at": "2026-05-05T05:33:46Z",
     "slug": "writing-tools-for-agents"
+  },
+  "https://www.anthropic.com/engineering/desktop-extensions": {
+    "processed_at": "2026-05-05T05:40:04Z",
+    "slug": "desktop-extensions"
   }
 }
