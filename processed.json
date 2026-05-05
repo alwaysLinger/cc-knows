@@ -78,5 +78,9 @@
   "https://www.anthropic.com/engineering/claude-code-best-practices": {
     "processed_at": "2026-05-05T05:50:33Z",
     "slug": "claude-code-best-practices"
+  },
+  "https://www.anthropic.com/engineering/claude-think-tool": {
+    "processed_at": "2026-05-05T05:56:44Z",
+    "slug": "claude-think-tool"
   }
 }
