@@ -34,5 +34,9 @@
   "https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents": {
     "processed_at": "2026-05-05T04:52:28Z",
     "slug": "demystifying-evals-for-ai-agents"
+  },
+  "https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents": {
+    "processed_at": "2026-05-05T04:55:21Z",
+    "slug": "effective-harnesses-for-long-running-agents"
   }
 }
