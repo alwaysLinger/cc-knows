@@ -14,5 +14,9 @@
   "https://www.anthropic.com/engineering/harness-design-long-running-apps": {
     "processed_at": "2026-05-05T04:29:03Z",
     "slug": "harness-design-long-running-apps"
+  },
+  "https://www.anthropic.com/engineering/eval-awareness-browsecomp": {
+    "processed_at": "2026-05-05T04:33:40Z",
+    "slug": "eval-awareness-browsecomp"
   }
 }
