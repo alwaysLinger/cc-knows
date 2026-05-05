@@ -22,5 +22,9 @@
   "https://www.anthropic.com/engineering/infrastructure-noise": {
     "processed_at": "2026-05-05T04:37:28Z",
     "slug": "infrastructure-noise"
+  },
+  "https://www.anthropic.com/engineering/building-c-compiler": {
+    "processed_at": "2026-05-05T04:41:28Z",
+    "slug": "building-c-compiler"
   }
 }
