@@ -10,5 +10,9 @@
   "https://www.anthropic.com/engineering/claude-code-auto-mode": {
     "processed_at": "2026-05-05T04:21:50Z",
     "slug": "claude-code-auto-mode"
+  },
+  "https://www.anthropic.com/engineering/harness-design-long-running-apps": {
+    "processed_at": "2026-05-05T04:29:03Z",
+    "slug": "harness-design-long-running-apps"
   }
 }
