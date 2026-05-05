@@ -18,5 +18,9 @@
   "https://www.anthropic.com/engineering/eval-awareness-browsecomp": {
     "processed_at": "2026-05-05T04:33:40Z",
     "slug": "eval-awareness-browsecomp"
+  },
+  "https://www.anthropic.com/engineering/infrastructure-noise": {
+    "processed_at": "2026-05-05T04:37:28Z",
+    "slug": "infrastructure-noise"
   }
 }
