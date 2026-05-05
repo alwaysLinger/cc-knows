@@ -30,5 +30,9 @@
   "https://www.anthropic.com/engineering/AI-resistant-technical-evaluations": {
     "processed_at": "2026-05-05T04:47:26Z",
     "slug": "AI-resistant-technical-evaluations"
+  },
+  "https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents": {
+    "processed_at": "2026-05-05T04:52:28Z",
+    "slug": "demystifying-evals-for-ai-agents"
   }
 }
