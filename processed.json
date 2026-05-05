@@ -54,5 +54,9 @@
   "https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills": {
     "processed_at": "2026-05-05T05:13:55Z",
     "slug": "equipping-agents-for-the-real-world-with-agent-skills"
+  },
+  "https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents": {
+    "processed_at": "2026-05-05T05:19:14Z",
+    "slug": "effective-context-engineering-for-ai-agents"
   }
 }
