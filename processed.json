@@ -62,5 +62,9 @@
   "https://www.anthropic.com/engineering/a-postmortem-of-three-recent-issues": {
     "processed_at": "2026-05-05T05:28:24Z",
     "slug": "a-postmortem-of-three-recent-issues"
+  },
+  "https://www.anthropic.com/engineering/writing-tools-for-agents": {
+    "processed_at": "2026-05-05T05:33:46Z",
+    "slug": "writing-tools-for-agents"
   }
 }
