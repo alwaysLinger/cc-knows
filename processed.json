@@ -38,5 +38,9 @@
   "https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents": {
     "processed_at": "2026-05-05T04:55:21Z",
     "slug": "effective-harnesses-for-long-running-agents"
+  },
+  "https://www.anthropic.com/engineering/advanced-tool-use": {
+    "processed_at": "2026-05-05T05:01:30Z",
+    "slug": "advanced-tool-use"
   }
 }
