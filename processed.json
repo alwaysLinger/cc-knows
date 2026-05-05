@@ -50,5 +50,9 @@
   "https://www.anthropic.com/engineering/claude-code-sandboxing": {
     "processed_at": "2026-05-05T05:09:28Z",
     "slug": "claude-code-sandboxing"
+  },
+  "https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills": {
+    "processed_at": "2026-05-05T05:13:55Z",
+    "slug": "equipping-agents-for-the-real-world-with-agent-skills"
   }
 }
