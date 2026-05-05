@@ -82,5 +82,9 @@
   "https://www.anthropic.com/engineering/claude-think-tool": {
     "processed_at": "2026-05-05T05:56:44Z",
     "slug": "claude-think-tool"
+  },
+  "https://www.anthropic.com/engineering/swe-bench-sonnet": {
+    "processed_at": "2026-05-05T06:02:19Z",
+    "slug": "swe-bench-sonnet"
   }
 }
