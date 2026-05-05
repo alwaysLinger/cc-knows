@@ -6,5 +6,9 @@
   "https://www.anthropic.com/engineering/managed-agents": {
     "processed_at": "2026-05-04T17:52:39Z",
     "slug": "managed-agents"
+  },
+  "https://www.anthropic.com/engineering/claude-code-auto-mode": {
+    "processed_at": "2026-05-05T04:21:50Z",
+    "slug": "claude-code-auto-mode"
   }
 }
