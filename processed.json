@@ -70,5 +70,9 @@
   "https://www.anthropic.com/engineering/desktop-extensions": {
     "processed_at": "2026-05-05T05:40:04Z",
     "slug": "desktop-extensions"
+  },
+  "https://www.anthropic.com/engineering/multi-agent-research-system": {
+    "processed_at": "2026-05-05T05:44:05Z",
+    "slug": "multi-agent-research-system"
   }
 }
