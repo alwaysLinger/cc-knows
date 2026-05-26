@@ -94,5 +94,9 @@
   "https://www.anthropic.com/engineering/contextual-retrieval": {
     "processed_at": "2026-05-05T06:14:10Z",
     "slug": "contextual-retrieval"
+  },
+  "https://www.anthropic.com/engineering/how-we-contain-claude": {
+    "processed_at": "2026-05-26T21:29:52Z",
+    "slug": "how-we-contain-claude"
   }
 }
