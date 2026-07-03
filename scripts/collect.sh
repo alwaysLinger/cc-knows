@@ -6,7 +6,7 @@ PROJECT_DIR="$(dirname "$SCRIPT_DIR")"
 ARTICLES_DIR="$PROJECT_DIR/articles"
 PROCESSED_FILE="$PROJECT_DIR/processed.json"
 ARTICLE_LIST_FILE="$PROJECT_DIR/.article-list.json"
-MODEL="${CLAUDE_MODEL:-glm-5.1}"
+MODEL="${CLAUDE_MODEL:-glm-5.2[1m]}"
 
 mkdir -p "$ARTICLES_DIR"
 
