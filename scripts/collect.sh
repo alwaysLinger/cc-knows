@@ -22,8 +22,7 @@ echo "=== Fetching article list ==="
 # Have Claude write the article list directly to a file (avoids stdout parsing issues)
 claude -p --print --no-session-persistence \
   --model "$MODEL" \
-  --allowedTools "WebFetch,Write" \
-  --max-budget-usd 1 \
+  --dangerously-skip-permissions \
   "访问 https://www.anthropic.com/engineering 页面，提取所有文章链接。
    将结果以 JSON 数组写入文件 .article-list.json，格式：
    [{\"url\": \"https://www.anthropic.com/engineering/...\", \"title\": \"文章标题\"}]
@@ -114,8 +113,7 @@ process_article() {
 
   if claude -p --print --no-session-persistence \
     --model "$MODEL" \
-    --allowedTools "WebFetch,Write" \
-    --max-budget-usd 3 \
+    --dangerously-skip-permissions \
     "$prompt" < /dev/null; then
 
     # Update processed.json
